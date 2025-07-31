@@ -30,6 +30,7 @@ export const DebateRoom = ({ roomId }: DebateRoomProps) => {
       <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/5 flex items-center justify-center">
         <JoinModal
           open={showJoinModal}
+          onClose={() => {}}
           title={title}
           topic={topic}
           participantCount={totalParticipants}

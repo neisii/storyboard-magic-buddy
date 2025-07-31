@@ -4,23 +4,25 @@ import { Users, MessageCircle, Clock } from 'lucide-react';
 
 interface JoinModalProps {
   open: boolean;
+  onClose: () => void;
   title: string;
   topic: string;
   participantCount: number;
-  isLoading: boolean;
+  isLoading?: boolean;
   onJoinAsAudience: () => void;
 }
 
 export const JoinModal = ({ 
   open, 
+  onClose,
   title, 
   topic, 
   participantCount, 
-  isLoading, 
+  isLoading = false, 
   onJoinAsAudience 
 }: JoinModalProps) => {
   return (
-    <Dialog open={open}>
+    <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md animate-scale-in">
         <DialogHeader className="text-center">
           <div className="mx-auto mb-4 p-3 bg-primary/10 rounded-full w-fit">
