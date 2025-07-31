@@ -20,7 +20,7 @@ interface FilterSectionProps {
 }
 
 export const FilterSection = ({ isVisible, filters, onFiltersChange, onClearFilters }: FilterSectionProps) => {
-  const [localParticipants, setLocalParticipants] = useState(filters.maxParticipants.toString());
+  const [localParticipants, setLocalParticipants] = useState(filters.maxParticipants === 999 ? '' : filters.maxParticipants.toString());
 
   const statusOptions = [
     { value: 'active', label: '진행중' },
@@ -41,7 +41,7 @@ export const FilterSection = ({ isVisible, filters, onFiltersChange, onClearFilt
 
   const handleParticipantsChange = (value: string) => {
     setLocalParticipants(value);
-    const numValue = parseInt(value) || 10;
+    const numValue = parseInt(value) || 999;
     if (numValue >= 1) {
       onFiltersChange({
         ...filters,
@@ -110,7 +110,7 @@ export const FilterSection = ({ isVisible, filters, onFiltersChange, onClearFilt
             </div>
 
             {/* 적용된 필터 표시 */}
-            {(filters.status.length > 0 || filters.maxParticipants !== 10) && (
+            {(filters.status.length > 0 || filters.maxParticipants !== 999) && (
               <div>
                 <Label className="text-sm font-medium mb-2 block">적용된 필터</Label>
                 <div className="flex flex-wrap gap-2">
@@ -127,14 +127,14 @@ export const FilterSection = ({ isVisible, filters, onFiltersChange, onClearFilt
                       </Button>
                     </Badge>
                   ))}
-                  {filters.maxParticipants !== 10 && (
+                  {filters.maxParticipants !== 999 && (
                     <Badge variant="secondary" className="gap-1">
                       최대 {filters.maxParticipants}명
                       <Button
                         variant="ghost"
                         size="sm"
                         className="h-auto p-0 w-4 h-4 hover:bg-transparent"
-                        onClick={() => handleParticipantsChange('10')}
+                        onClick={() => handleParticipantsChange('999')}
                       >
                         <X className="h-3 w-3" />
                       </Button>

@@ -57,6 +57,94 @@ const mockRooms: DebateRoom[] = [
     duration: '2시간',
     topic: '교육과 사회',
     createdAt: '2024-01-12'
+  },
+  {
+    id: '5',
+    title: '디지털 미니멀리즘의 필요성',
+    description: '스마트폰과 SNS 과의존 시대, 디지털 디톡스의 효과와 한계를 논의합니다.',
+    status: 'active',
+    participantCount: 5,
+    maxParticipants: 12,
+    duration: '30분',
+    topic: '테크놀로지',
+    createdAt: '2024-01-14'
+  },
+  {
+    id: '6',
+    title: '전기차 vs 하이브리드차',
+    description: '친환경 자동차의 미래, 전기차와 하이브리드차 중 어느 것이 더 현실적인지 토론합니다.',
+    status: 'active',
+    participantCount: 9,
+    maxParticipants: 16,
+    duration: '45분',
+    topic: '환경과 기술',
+    createdAt: '2024-01-13'
+  },
+  {
+    id: '7',
+    title: '최저임금 인상의 효과',
+    description: '최저임금 인상이 경제와 일자리에 미치는 긍정적/부정적 영향을 분석합니다.',
+    status: 'paused',
+    participantCount: 7,
+    maxParticipants: 14,
+    duration: '1시간',
+    topic: '경제와 정책',
+    createdAt: '2024-01-12'
+  },
+  {
+    id: '8',
+    title: '대중교통 무료화 정책',
+    description: '대중교통 무료화가 환경과 시민생활에 미치는 영향을 토론합니다.',
+    status: 'active',
+    participantCount: 11,
+    maxParticipants: 18,
+    duration: '30분',
+    topic: '정책과 사회',
+    createdAt: '2024-01-11'
+  },
+  {
+    id: '9',
+    title: '메타버스의 미래',
+    description: '가상현실과 메타버스 기술이 우리 삶에 가져올 변화와 가능성을 논의합니다.',
+    status: 'ended',
+    participantCount: 20,
+    maxParticipants: 20,
+    duration: '1시간 30분',
+    topic: '테크놀로지',
+    createdAt: '2024-01-10'
+  },
+  {
+    id: '10',
+    title: '비건 생활의 현실성',
+    description: '환경과 동물보호를 위한 비건 라이프스타일의 장점과 현실적 어려움을 토론합니다.',
+    status: 'active',
+    participantCount: 4,
+    maxParticipants: 10,
+    duration: '45분',
+    topic: '환경과 윤리',
+    createdAt: '2024-01-10'
+  },
+  {
+    id: '11',
+    title: '주4일제 근무의 현실성',
+    description: '일과 삶의 균형을 위한 주4일제 도입의 효과와 현실적 한계를 논의합니다.',
+    status: 'paused',
+    participantCount: 8,
+    maxParticipants: 15,
+    duration: '1시간',
+    topic: '노동과 정책',
+    createdAt: '2024-01-09'
+  },
+  {
+    id: '12',
+    title: '우주 개발의 우선순위',
+    description: '지구의 환경 문제 해결 vs 우주 개발, 어느 것이 더 우선되어야 하는지 토론합니다.',
+    status: 'active',
+    participantCount: 6,
+    maxParticipants: 12,
+    duration: '45분',
+    topic: '과학과 정책',
+    createdAt: '2024-01-09'
   }
 ];
 
@@ -71,7 +159,7 @@ export const HomePage = () => {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [filters, setFilters] = useState<FilterState>({
     status: [],
-    maxParticipants: 10
+    maxParticipants: 999 // 필터 없음 (모든 토론방 표시)
   });
 
   const filteredRooms = mockRooms.filter(room => {
@@ -135,7 +223,7 @@ export const HomePage = () => {
   const handleClearFilters = () => {
     setFilters({
       status: [],
-      maxParticipants: 10
+      maxParticipants: 999 // 필터 없음
     });
   };
 

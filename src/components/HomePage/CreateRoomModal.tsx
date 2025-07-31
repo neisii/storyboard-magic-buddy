@@ -17,11 +17,14 @@ export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalPr
     title: '',
     description: '',
     category: '',
-    duration: '30'
+    debateFormat: ''
   });
+
+  const isFormValid = formData.title && formData.description && formData.category && formData.debateFormat;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isFormValid) return;
     onCreate(formData);
     onClose();
     // 폼 초기화
@@ -29,7 +32,7 @@ export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalPr
       title: '',
       description: '',
       category: '',
-      duration: '30'
+      debateFormat: ''
     });
   };
 
@@ -48,6 +51,7 @@ export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalPr
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
               placeholder="토론 주제를 입력하세요"
+              className={!formData.title ? 'border-destructive focus-visible:ring-destructive' : ''}
               required
             />
           </div>
@@ -59,6 +63,7 @@ export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalPr
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               placeholder="토론에 대한 간단한 설명을 입력하세요"
+              className={!formData.description ? 'border-destructive focus-visible:ring-destructive' : ''}
               rows={3}
             />
           </div>
@@ -66,7 +71,7 @@ export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalPr
           <div className="space-y-2">
             <Label htmlFor="category">카테고리</Label>
             <Select value={formData.category} onValueChange={(value) => setFormData({ ...formData, category: value })}>
-              <SelectTrigger>
+              <SelectTrigger className={!formData.category ? 'border-destructive focus:ring-destructive' : ''}>
                 <SelectValue placeholder="카테고리를 선택하세요" />
               </SelectTrigger>
               <SelectContent>
@@ -81,16 +86,14 @@ export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalPr
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="duration">토론 시간</Label>
-            <Select value={formData.duration} onValueChange={(value) => setFormData({ ...formData, duration: value })}>
-              <SelectTrigger>
-                <SelectValue />
+            <Label htmlFor="debateFormat">토론 방식</Label>
+            <Select value={formData.debateFormat} onValueChange={(value) => setFormData({ ...formData, debateFormat: value })}>
+              <SelectTrigger className={!formData.debateFormat ? 'border-destructive focus:ring-destructive' : ''}>
+                <SelectValue placeholder="토론 방식을 선택하세요" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="15">15분</SelectItem>
-                <SelectItem value="30">30분</SelectItem>
-                <SelectItem value="45">45분</SelectItem>
-                <SelectItem value="60">60분</SelectItem>
+                <SelectItem value="general">일반 토론</SelectItem>
+                <SelectItem value="quick">3분 토론</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -99,7 +102,7 @@ export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalPr
             <Button type="button" variant="outline" onClick={onClose} className="flex-1">
               취소
             </Button>
-            <Button type="submit" className="flex-1">
+            <Button type="submit" className="flex-1" disabled={!isFormValid}>
               토론방 만들기
             </Button>
           </div>
