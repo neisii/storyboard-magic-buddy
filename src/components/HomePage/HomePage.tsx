@@ -9,6 +9,7 @@ import { JoinModal } from '../DebateRoom/JoinModal';
 import { CreateRoomModal } from './CreateRoomModal';
 import { LoginModal } from './LoginModal';
 import { SignupModal } from './SignupModal';
+import { FilterSection, type FilterState } from './FilterSection';
 import { useAuth } from '@/hooks/useAuth';
 import { toast } from 'sonner';
 
@@ -67,12 +68,26 @@ export const HomePage = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const [filters, setFilters] = useState<FilterState>({
+    status: [],
+    maxParticipants: 10
+  });
 
-  const filteredRooms = mockRooms.filter(room => 
-    room.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    room.topic.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    room.description.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredRooms = mockRooms.filter(room => {
+    // 검색어 필터링
+    const matchesSearch = room.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      room.topic.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      room.description.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    // 상태 필터링
+    const matchesStatus = filters.status.length === 0 || filters.status.includes(room.status);
+    
+    // 참여자 수 필터링
+    const matchesParticipants = room.maxParticipants <= filters.maxParticipants;
+    
+    return matchesSearch && matchesStatus && matchesParticipants;
+  });
 
   const handleRoomClick = (room: DebateRoom) => {
     if (room.status === 'active') {
@@ -109,8 +124,19 @@ export const HomePage = () => {
     setIsLoginModalOpen(true);
   };
 
-  const handleSignup = () => {
-    setIsSignupModalOpen(true);
+  const handleFilterToggle = () => {
+    setIsFilterVisible(!isFilterVisible);
+  };
+
+  const handleFiltersChange = (newFilters: FilterState) => {
+    setFilters(newFilters);
+  };
+
+  const handleClearFilters = () => {
+    setFilters({
+      status: [],
+      maxParticipants: 10
+    });
   };
 
   const handleKakaoLogin = async () => {
@@ -173,11 +199,23 @@ export const HomePage = () => {
               className="pl-10 bg-card/50 backdrop-blur-sm border-border/50"
             />
           </div>
-          <Button variant="outline" className="gap-2 bg-card/50 backdrop-blur-sm border-border/50">
+          <Button 
+            variant="outline" 
+            className="gap-2 bg-card/50 backdrop-blur-sm border-border/50"
+            onClick={handleFilterToggle}
+          >
             <Filter className="h-4 w-4" />
             필터
           </Button>
         </div>
+
+        {/* Filter Section */}
+        <FilterSection
+          isVisible={isFilterVisible}
+          filters={filters}
+          onFiltersChange={handleFiltersChange}
+          onClearFilters={handleClearFilters}
+        />
 
         {/* Room Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -206,7 +244,7 @@ export const HomePage = () => {
       </div>
 
       {/* Floating User Menu */}
-      <UserFloatingMenu onLogin={handleLogin} onSignup={handleSignup} />
+      <UserFloatingMenu onLogin={handleLogin} />
 
       {/* Join Modal */}
       {selectedRoom && (
