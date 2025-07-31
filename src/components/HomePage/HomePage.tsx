@@ -6,6 +6,9 @@ import { MessageCircle, Search, Plus, Filter } from 'lucide-react';
 import { DebateRoomCard, type DebateRoom } from './DebateRoomCard';
 import { UserFloatingMenu } from './UserFloatingMenu';
 import { JoinModal } from '../DebateRoom/JoinModal';
+import { CreateRoomModal } from './CreateRoomModal';
+import { useAuth } from '@/hooks/useAuth';
+import { toast } from 'sonner';
 
 const mockRooms: DebateRoom[] = [
   {
@@ -55,9 +58,11 @@ const mockRooms: DebateRoom[] = [
 ];
 
 export const HomePage = () => {
+  const { isAuthenticated, isGuest, login } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRoom, setSelectedRoom] = useState<DebateRoom | null>(null);
   const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   const filteredRooms = mockRooms.filter(room => 
     room.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -78,14 +83,30 @@ export const HomePage = () => {
     }
   };
 
-  const handleLogin = () => {
-    console.log('Login clicked');
-    // TODO: Implement login logic
+  const handleCreateRoom = () => {
+    if (isGuest) {
+      toast.error('토론에 참여하시려면 회원가입 또는 로그인을 해주세요', {
+        position: 'top-right',
+        style: {
+          marginTop: '25vh' // 상단으로부터 2/8 지점 (25%)
+        }
+      });
+      return;
+    }
+    setIsCreateModalOpen(true);
   };
 
-  const handleSignup = () => {
-    console.log('Signup clicked');
-    // TODO: Implement signup logic
+  const handleCreateRoomSubmit = (roomData: any) => {
+    console.log('토론방 생성:', roomData);
+    toast.success('토론방이 성공적으로 생성되었습니다!');
+  };
+
+  const handleLogin = async () => {
+    await login('google'); // 임시로 구글 로그인
+  };
+
+  const handleSignup = async () => {
+    await login('kakao'); // 임시로 카카오 회원가입
   };
 
   return (
@@ -104,7 +125,11 @@ export const HomePage = () => {
               </div>
             </div>
             
-            <Button className="gap-2 shadow-glow">
+            <Button 
+              onClick={handleCreateRoom}
+              disabled={isGuest}
+              className={`gap-2 shadow-glow ${isGuest ? 'opacity-50 cursor-not-allowed' : ''}`}
+            >
               <Plus className="h-4 w-4" />
               토론방 만들기
             </Button>
@@ -173,6 +198,13 @@ export const HomePage = () => {
           onJoinAsAudience={handleJoinRoom}
         />
       )}
+
+      {/* Create Room Modal */}
+      <CreateRoomModal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
+        onCreate={handleCreateRoomSubmit}
+      />
     </div>
   );
 };
