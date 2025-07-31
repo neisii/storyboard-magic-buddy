@@ -2,14 +2,15 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { LogIn, UserPlus, User, LogOut } from 'lucide-react';
+import { LogIn, UserPlus, User, LogOut, Settings } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 
 interface UserFloatingMenuProps {
   onLogin: () => void;
+  onProfileClick: () => void;
 }
 
-export const UserFloatingMenu = ({ onLogin }: UserFloatingMenuProps) => {
+export const UserFloatingMenu = ({ onLogin, onProfileClick }: UserFloatingMenuProps) => {
   const { user, isAuthenticated, logout } = useAuth();
   
   const getProviderDisplay = (provider: 'kakao' | 'google') => {
@@ -60,6 +61,13 @@ export const UserFloatingMenu = ({ onLogin }: UserFloatingMenuProps) => {
               </div>
             </div>
             <DropdownMenuSeparator />
+            <DropdownMenuItem 
+              onClick={onProfileClick}
+              className="gap-2 cursor-pointer hover:bg-accent/80"
+            >
+              <Settings className="h-4 w-4" />
+              내 정보 관리
+            </DropdownMenuItem>
             <DropdownMenuItem 
               onClick={logout}
               className="gap-2 cursor-pointer hover:bg-accent/80"

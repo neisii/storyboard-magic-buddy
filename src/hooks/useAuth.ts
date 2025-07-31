@@ -6,6 +6,7 @@ export interface User {
   email: string;
   provider: 'kakao' | 'google';
   avatar?: string;
+  role: 'speaker' | 'guest';
 }
 
 export const useAuth = () => {
@@ -22,8 +23,18 @@ export const useAuth = () => {
         name: provider === 'kakao' ? '카카오 사용자' : '구글 사용자',
         email: `user@${provider}.com`,
         provider,
-        avatar: undefined
+        avatar: undefined,
+        role: 'speaker'
       });
+      setIsLoading(false);
+    }, 1000);
+  };
+
+  const deleteAccount = async () => {
+    setIsLoading(true);
+    // 실제로는 Supabase에서 계정 삭제 로직
+    setTimeout(() => {
+      setUser(null);
       setIsLoading(false);
     }, 1000);
   };
@@ -41,6 +52,7 @@ export const useAuth = () => {
     isGuest,
     isLoading,
     login,
-    logout
+    logout,
+    deleteAccount
   };
 };

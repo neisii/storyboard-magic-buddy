@@ -9,6 +9,7 @@ import { JoinModal } from '../DebateRoom/JoinModal';
 import { CreateRoomModal } from './CreateRoomModal';
 import { LoginModal } from './LoginModal';
 import { SignupModal } from './SignupModal';
+import { ProfileModal } from './ProfileModal';
 import { FilterSection, type FilterState } from './FilterSection';
 import { useAuth } from '@/hooks/useAuth';
 import { toast } from 'sonner';
@@ -156,6 +157,7 @@ export const HomePage = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [filters, setFilters] = useState<FilterState>({
     status: [],
@@ -332,7 +334,10 @@ export const HomePage = () => {
       </div>
 
       {/* Floating User Menu */}
-      <UserFloatingMenu onLogin={handleLogin} />
+      <UserFloatingMenu 
+        onLogin={handleLogin} 
+        onProfileClick={() => setIsProfileModalOpen(true)}
+      />
 
       {/* Join Modal */}
       {selectedRoom && (
@@ -370,6 +375,11 @@ export const HomePage = () => {
         onClose={() => setIsSignupModalOpen(false)}
         onKakaoSignup={handleKakaoSignup}
         onGoogleSignup={handleGoogleSignup}
+      />
+
+      <ProfileModal
+        isOpen={isProfileModalOpen}
+        onClose={() => setIsProfileModalOpen(false)}
       />
     </div>
   );
