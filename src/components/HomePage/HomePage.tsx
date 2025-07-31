@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -150,6 +151,7 @@ const mockRooms: DebateRoom[] = [
 ];
 
 export const HomePage = () => {
+  const navigate = useNavigate();
   const { isAuthenticated, isGuest, login } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRoom, setSelectedRoom] = useState<DebateRoom | null>(null);
@@ -180,10 +182,12 @@ export const HomePage = () => {
   });
 
   const handleRoomClick = (room: DebateRoom) => {
-    if (room.status === 'active') {
-      setSelectedRoom(room);
-      setIsJoinModalOpen(true);
-    }
+    setSelectedRoom(room);
+    setIsJoinModalOpen(true);
+  };
+
+  const handleAudienceJoin = (room: DebateRoom) => {
+    navigate(`/debate/${room.id}`);
   };
 
   const handleJoinRoom = () => {
@@ -318,6 +322,7 @@ export const HomePage = () => {
               <DebateRoomCard 
                 room={room} 
                 onClick={() => handleRoomClick(room)}
+                onAudienceJoin={() => handleAudienceJoin(room)}
               />
             </div>
           ))}

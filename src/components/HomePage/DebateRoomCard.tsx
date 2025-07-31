@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Users, Clock, Play, Pause, Square } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -20,6 +21,7 @@ export interface DebateRoom {
 interface DebateRoomCardProps {
   room: DebateRoom;
   onClick: () => void;
+  onAudienceJoin: () => void;
 }
 
 const statusConfig = {
@@ -46,7 +48,7 @@ const statusConfig = {
   }
 };
 
-export const DebateRoomCard = ({ room, onClick }: DebateRoomCardProps) => {
+export const DebateRoomCard = ({ room, onClick, onAudienceJoin }: DebateRoomCardProps) => {
   const config = statusConfig[room.status];
   const StatusIcon = config.icon;
   const isClickable = room.status === 'active';
@@ -56,10 +58,8 @@ export const DebateRoomCard = ({ room, onClick }: DebateRoomCardProps) => {
       className={cn(
         "group transition-all duration-300 border-0 bg-card/50 backdrop-blur-sm",
         "hover:shadow-elegant animate-fade-in",
-        isClickable && "cursor-pointer hover:scale-[1.02]",
         !isClickable && "opacity-75"
       )}
-      onClick={isClickable ? onClick : undefined}
     >
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
@@ -105,6 +105,33 @@ export const DebateRoomCard = ({ room, onClick }: DebateRoomCardProps) => {
             {new Date(room.createdAt).toLocaleDateString('ko-KR')}
           </div>
         </div>
+        
+        {isClickable && (
+          <div className="flex gap-2 mt-4">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="flex-1"
+              onClick={(e) => {
+                e.stopPropagation();
+                onAudienceJoin();
+              }}
+            >
+              관중으로 참여하기
+            </Button>
+            <Button 
+              variant="default" 
+              size="sm" 
+              className="flex-1"
+              onClick={(e) => {
+                e.stopPropagation();
+                onClick();
+              }}
+            >
+              발화자로 참여하기
+            </Button>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
