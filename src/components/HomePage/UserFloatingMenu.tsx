@@ -21,14 +21,8 @@ export const UserFloatingMenu = ({ onLogin, onProfileClick }: UserFloatingMenuPr
     return provider === 'kakao' ? 'text-yellow-500' : 'text-blue-500';
   };
 
-  const handleClick = () => {
-    if (isAuthenticated) {
-      // 로그인된 상태에서는 드롭다운 메뉴 표시
-      return;
-    } else {
-      // 로그인되지 않은 상태에서는 바로 로그인 모달 표시
-      onLogin();
-    }
+  const handleLoginClick = () => {
+    onLogin();
   };
   
   return (
@@ -79,7 +73,7 @@ export const UserFloatingMenu = ({ onLogin, onProfileClick }: UserFloatingMenuPr
         </DropdownMenu>
       ) : (
         <Button
-          onClick={handleClick}
+          onClick={handleLoginClick}
           variant="outline"
           size="icon"
           className="h-12 w-12 rounded-full bg-card/80 backdrop-blur-sm border-border/50 hover:bg-accent/80 shadow-glow transition-all duration-300 hover:scale-105"
