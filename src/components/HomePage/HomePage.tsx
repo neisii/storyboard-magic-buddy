@@ -7,6 +7,8 @@ import { DebateRoomCard, type DebateRoom } from './DebateRoomCard';
 import { UserFloatingMenu } from './UserFloatingMenu';
 import { JoinModal } from '../DebateRoom/JoinModal';
 import { CreateRoomModal } from './CreateRoomModal';
+import { LoginModal } from './LoginModal';
+import { SignupModal } from './SignupModal';
 import { useAuth } from '@/hooks/useAuth';
 import { toast } from 'sonner';
 
@@ -63,6 +65,8 @@ export const HomePage = () => {
   const [selectedRoom, setSelectedRoom] = useState<DebateRoom | null>(null);
   const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
 
   const filteredRooms = mockRooms.filter(room => 
     room.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -101,12 +105,32 @@ export const HomePage = () => {
     toast.success('토론방이 성공적으로 생성되었습니다!');
   };
 
-  const handleLogin = async () => {
-    await login('google'); // 임시로 구글 로그인
+  const handleLogin = () => {
+    setIsLoginModalOpen(true);
   };
 
-  const handleSignup = async () => {
-    await login('kakao'); // 임시로 카카오 회원가입
+  const handleSignup = () => {
+    setIsSignupModalOpen(true);
+  };
+
+  const handleKakaoLogin = async () => {
+    await login('kakao');
+    setIsLoginModalOpen(false);
+  };
+
+  const handleGoogleLogin = async () => {
+    await login('google');
+    setIsLoginModalOpen(false);
+  };
+
+  const handleKakaoSignup = async () => {
+    await login('kakao');
+    setIsSignupModalOpen(false);
+  };
+
+  const handleGoogleSignup = async () => {
+    await login('google');
+    setIsSignupModalOpen(false);
   };
 
   return (
@@ -204,6 +228,22 @@ export const HomePage = () => {
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
         onCreate={handleCreateRoomSubmit}
+      />
+
+      {/* Login Modal */}
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+        onKakaoLogin={handleKakaoLogin}
+        onGoogleLogin={handleGoogleLogin}
+      />
+
+      {/* Signup Modal */}
+      <SignupModal
+        isOpen={isSignupModalOpen}
+        onClose={() => setIsSignupModalOpen(false)}
+        onKakaoSignup={handleKakaoSignup}
+        onGoogleSignup={handleGoogleSignup}
       />
     </div>
   );
