@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface CreateRoomModalProps {
@@ -87,15 +88,26 @@ export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalPr
           
           <div className="space-y-2">
             <Label htmlFor="debateFormat">토론 방식</Label>
-            <Select value={formData.debateFormat} onValueChange={(value) => setFormData({ ...formData, debateFormat: value })}>
-              <SelectTrigger className={!formData.debateFormat ? 'border-destructive focus:ring-destructive' : ''}>
-                <SelectValue placeholder="토론 방식을 선택하세요" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="general">일반 토론</SelectItem>
-                <SelectItem value="quick">3분 토론</SelectItem>
-              </SelectContent>
-            </Select>
+            <div className="flex gap-2">
+              <Badge
+                variant={formData.debateFormat === 'general' ? 'default' : 'outline'}
+                className={`cursor-pointer hover:bg-primary/90 transition-colors px-4 py-2 ${
+                  !formData.debateFormat ? 'border-destructive' : ''
+                }`}
+                onClick={() => setFormData({ ...formData, debateFormat: 'general' })}
+              >
+                일반 토론
+              </Badge>
+              <Badge
+                variant={formData.debateFormat === 'quick' ? 'default' : 'outline'}
+                className={`cursor-pointer hover:bg-primary/90 transition-colors px-4 py-2 ${
+                  !formData.debateFormat ? 'border-destructive' : ''
+                }`}
+                onClick={() => setFormData({ ...formData, debateFormat: 'quick' })}
+              >
+                3분 토론
+              </Badge>
+            </div>
           </div>
           
           <div className="flex gap-2 pt-4">
