@@ -144,11 +144,17 @@ const Index = () => {
             <CardTitle className="text-primary">시나리오 요약</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-muted-foreground leading-relaxed">
+            <p className="text-muted-foreground leading-relaxed mb-4">
               관중이 토론방에 입장하는 전체 플로우를 4단계로 구성했습니다. 
               초기 접속부터 완성된 토론방 화면까지의 사용자 경험을 시각화하여 
               개발 시 참고할 수 있도록 설계했습니다.
             </p>
+            <Button asChild className="gap-2">
+              <a href="/debate/sample-room">
+                <MessageCircle className="h-4 w-4" />
+                실제 토론방 체험하기
+              </a>
+            </Button>
           </CardContent>
         </Card>
       </div>
