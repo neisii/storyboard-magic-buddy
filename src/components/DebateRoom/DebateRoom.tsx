@@ -17,7 +17,7 @@ export const DebateRoom = ({ roomId }: DebateRoomProps) => {
     currentSpeaker,
     speechHistory,
     chatMessages,
-    isLoading,
+    isLoading = true,
     // showJoinModal,
     isJoined,
     actions
