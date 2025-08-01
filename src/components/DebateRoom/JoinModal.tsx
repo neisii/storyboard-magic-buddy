@@ -57,7 +57,7 @@ export const JoinModal = ({
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <Users className="h-4 w-4" />
-                  <span>{room.duration} 째 불타는 중</span>
+                  <span>{duration} 째 불타는 중</span>
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <Clock className="h-4 w-4" />
