@@ -26,7 +26,7 @@ export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalPr
     category: '',
     debateFormat: 'general',
     maxSpeakers: '2',
-    duration: '0'
+    duration: '30'
   });
 
   const isFormValid = formData.title && formData.description && formData.category && formData.debateFormat && formData.maxSpeakers;
@@ -60,7 +60,7 @@ export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalPr
       category: '',
       debateFormat: 'general',
       maxSpeakers: '2',
-      duration: '0'
+      duration: '30'
     });
   };
 
@@ -149,8 +149,11 @@ export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalPr
             ) : (
               <div className="space-y-3">
                 <Slider
-                  value={[parseInt(formData.duration)]}
-                  onValueChange={(value) => setFormData({ ...formData, duration: value[0].toString() })}
+                  value={[formData.duration === '30' ? 0 : formData.duration === '60' ? 1 : formData.duration === '90' ? 2 : 3]}
+                  onValueChange={(value) => {
+                    const timeMapping = ['30', '60', '90', '120'];
+                    setFormData({ ...formData, duration: timeMapping[value[0]] });
+                  }}
                   min={0}
                   max={3}
                   step={1}
@@ -161,14 +164,6 @@ export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalPr
                   <span>60분</span>
                   <span>90분</span>
                   <span>120분</span>
-                </div>
-                <div className="text-center">
-                  <span className="text-sm font-medium">
-                    {formData.duration === '0' && '30분'}
-                    {formData.duration === '1' && '60분'}
-                    {formData.duration === '2' && '90분'}
-                    {formData.duration === '3' && '120분'}
-                  </span>
                 </div>
               </div>
             )}
