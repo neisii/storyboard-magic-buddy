@@ -354,6 +354,18 @@ export const HomePage = () => {
         onCreate={handleCreateRoomSubmit}
       />
 
+      {/* Join Room Modal */}
+      {selectedRoom && (
+        <JoinModal
+          open={isJoinModalOpen}
+          onClose={() => setIsJoinModalOpen(false)}
+          title={selectedRoom.title}
+          topic={selectedRoom.topic}
+          participantCount={selectedRoom.participantCount}
+          onJoinAsAudience={() => handleJoinRoom()}
+        />
+      )}
+
     </div>
   );
 };
