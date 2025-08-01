@@ -13,6 +13,7 @@ import { SignupModal } from './SignupModal';
 import { ProfileModal } from './ProfileModal';
 import { FilterSection, type FilterState } from './FilterSection';
 // import { useAuth } from '@/hooks/useAuth';
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { toast } from 'sonner';
 
 const mockRooms: DebateRoom[] = [
