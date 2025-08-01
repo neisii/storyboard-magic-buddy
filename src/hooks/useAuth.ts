@@ -18,6 +18,7 @@ export const useAuth = () => {
     setIsLoading(true);
     // 실제로는 Supabase auth 로직
     setTimeout(() => {
+      console.log("setTimeout");
       setUser({
         id: '1',
         name: provider === 'kakao' ? '카카오 사용자' : '구글 사용자',
