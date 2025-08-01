@@ -213,6 +213,12 @@ export const HomePage = () => {
   const handleCreateRoomSubmit = (roomData: any) => {
     console.log('토론방 생성:', roomData);
     toast.success('토론방이 성공적으로 생성되었습니다!');
+    
+    // 새로 생성된 토론방 ID (실제로는 서버에서 받아옴)
+    const newRoomId = Date.now().toString();
+    setTimeout(() => {
+      navigate(`/debate/${newRoomId}`);
+    }, 1500);
   };
 
   const handleLogin = () => {

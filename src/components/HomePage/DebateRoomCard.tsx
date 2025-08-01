@@ -51,7 +51,7 @@ const statusConfig = {
 export const DebateRoomCard = ({ room, onClick, onAudienceJoin }: DebateRoomCardProps) => {
   const config = statusConfig[room.status];
   const StatusIcon = config.icon;
-  const isClickable = room.status === 'active';
+  const isClickable = room.status === 'active' || room.status === 'paused';
 
   return (
     <Card 
