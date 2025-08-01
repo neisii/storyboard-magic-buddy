@@ -238,8 +238,7 @@ export const HomePage = () => {
 
   const handleClearFilters = () => {
     setFilters({
-      status: [],
-      maxParticipants: 999 // 필터 없음
+      status: []
     });
   };
 
