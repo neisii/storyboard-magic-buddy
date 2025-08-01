@@ -127,19 +127,6 @@ export const FilterSection = ({ isVisible, filters, onFiltersChange, onClearFilt
                       </Button>
                     </Badge>
                   ))}
-                  {filters.maxParticipants !== 999 && (
-                    <Badge variant="secondary" className="gap-1">
-                      최대 {filters.maxParticipants}명
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-auto p-0 w-4 h-4 hover:bg-transparent"
-                        onClick={() => handleParticipantsChange('999')}
-                      >
-                        <X className="h-3 w-3" />
-                      </Button>
-                    </Badge>
-                  )}
                 </div>
               </div>
             )}
