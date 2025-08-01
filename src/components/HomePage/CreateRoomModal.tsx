@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -6,6 +7,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useAuth } from '@/contexts/AuthContext';
+import { toast } from 'sonner';
 
 interface CreateRoomModalProps {
   isOpen: boolean;
@@ -14,6 +17,8 @@ interface CreateRoomModalProps {
 }
 
 export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalProps) => {
+  const navigate = useNavigate();
+  const { isAuthenticated, isGuest } = useAuth();
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -26,8 +31,21 @@ export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalPr
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!isFormValid) return;
+    
+    // 인증 검증
+    if (!isAuthenticated || isGuest) {
+      toast.error('토론방을 만들려면 로그인이 필요합니다.');
+      return;
+    }
+    
+    // 토론방 생성
+    const roomId = Date.now().toString(); // 임시 ID 생성
     onCreate(formData);
     onClose();
+    
+    // 토론방으로 이동
+    navigate(`/debate/${roomId}`);
+    
     // 폼 초기화
     setFormData({
       title: '',

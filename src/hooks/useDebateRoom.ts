@@ -151,8 +151,15 @@ export const useDebateRoom = (roomId: string) => {
 
   // 토론방 나가기
   const leaveRoom = () => {
-    // 홈페이지로 이동
-    window.location.href = '/';
+    const isSpeaker = state.userRole === 'speaker';
+    const message = isSpeaker 
+      ? '토론을 중단하고 나가시겠습니까?' 
+      : '토론방에서 나가시겠습니까?';
+    
+    if (window.confirm(message)) {
+      // 홈페이지로 이동
+      window.location.href = '/';
+    }
   };
 
   // 손들기 (관중이 발언 요청)
