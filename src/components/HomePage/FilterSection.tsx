@@ -19,7 +19,6 @@ interface FilterSectionProps {
   onClearFilters: () => void;
 }
 
-// TODO: 참여자 조건 삭제, 토론 방식 추가
 export const FilterSection = ({ isVisible, filters, onFiltersChange, onClearFilters }: FilterSectionProps) => {
   const [localParticipants, setLocalParticipants] = useState(filters.maxParticipants === 999 ? '' : filters.maxParticipants.toString());
 
