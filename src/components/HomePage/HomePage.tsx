@@ -14,7 +14,7 @@ import { ProfileModal } from './ProfileModal';
 import { FilterSection, type FilterState } from './FilterSection';
 // import { useAuth } from '@/hooks/useAuth'; // 기본 hook 대신 AuthContext 사용해야 함
 import { useAuth } from "@/contexts/AuthContext";
-import { toast } from 'sonner';
+import { toast } from '@/hooks/use-toast';
 
 const mockRooms: DebateRoom[] = [
   {
@@ -198,12 +198,12 @@ export const HomePage = () => {
   };
 
   const handleCreateRoom = () => {
-    if (isGuest) {
-      toast.error('토론에 참여하시려면 회원가입 또는 로그인을 해주세요', {
-        position: 'top-right',
-        style: {
-          marginTop: '25vh' // 상단으로부터 2/8 지점 (25%)
-        }
+    // 인증 검증
+    if (!isAuthenticated || isGuest) {
+      toast({
+        title: "로그인 필요",
+        description: "토론방을 만들려면 로그인이 필요합니다.",
+        variant: "destructive",
       });
       return;
     }
@@ -212,7 +212,10 @@ export const HomePage = () => {
 
   const handleCreateRoomSubmit = (roomData: any) => {
     console.log('토론방 생성:', roomData);
-    toast.success('토론방이 성공적으로 생성되었습니다!');
+    toast({
+      title: "토론방 생성 완료",
+      description: "토론방이 성공적으로 생성되었습니다!",
+    });
     
     // 새로 생성된 토론방 ID (실제로는 서버에서 받아옴)
     const newRoomId = Date.now().toString();

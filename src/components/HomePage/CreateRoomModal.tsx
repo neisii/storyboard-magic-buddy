@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useAuth } from '@/contexts/AuthContext';
-import { toast } from 'sonner';
+import { toast } from '@/hooks/use-toast';
 
 interface CreateRoomModalProps {
   isOpen: boolean;
@@ -34,7 +34,11 @@ export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalPr
     
     // 인증 검증
     if (!isAuthenticated || isGuest) {
-      toast.error('토론방을 만들려면 로그인이 필요합니다.');
+      toast({
+        title: "로그인 필요",
+        description: "토론방을 만들려면 로그인이 필요합니다.",
+        variant: "destructive",
+      });
       return;
     }
     
