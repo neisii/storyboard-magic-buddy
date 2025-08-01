@@ -34,6 +34,7 @@ export const DebateRoom = ({ roomId }: DebateRoomProps) => {
           title={title}
           topic={topic}
           participantCount={totalParticipants}
+          duration={duration}
           isLoading={isLoading}
           onJoinAsAudience={actions.joinAsAudience}
           onJoinAsSpeaker={actions.joinAsSpeaker}

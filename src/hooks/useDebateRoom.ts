@@ -41,7 +41,7 @@ export interface DebateRoomState {
   currentSpeaker: Speaker | null;
   isLoading: boolean;
   isJoined: boolean;
-  showJoinModal: boolean;
+  // showJoinModal: boolean;
   userRole: 'speaker' | 'audience' | null;
 }
 
@@ -57,7 +57,7 @@ export const useDebateRoom = (roomId: string) => {
     currentSpeaker: null,
     isLoading: true,
     isJoined: false,
-    showJoinModal: true,
+    // showJoinModal: true,
     userRole: null,
   });
 
@@ -127,7 +127,7 @@ export const useDebateRoom = (roomId: string) => {
   const joinAsAudience = () => {
     setState(prev => ({
       ...prev,
-      showJoinModal: false,
+      // showJoinModal: false,
       isJoined: true,
       userRole: 'audience',
     }));
@@ -137,7 +137,7 @@ export const useDebateRoom = (roomId: string) => {
   const joinAsSpeaker = () => {
     setState(prev => ({
       ...prev,
-      showJoinModal: false,
+      // showJoinModal: false,
       isJoined: true,
       userRole: 'speaker',
     }));
@@ -179,9 +179,9 @@ export const useDebateRoom = (roomId: string) => {
   };
 
   useEffect(() => {
-    if (roomId && state.showJoinModal) {
+    // if (roomId && state.showJoinModal) {
       loadRoomData();
-    }
+    // }
   }, [roomId]);
 
   return {
