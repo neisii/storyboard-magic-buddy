@@ -23,10 +23,12 @@ export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalPr
     title: '',
     description: '',
     category: '',
-    debateFormat: ''
+    debateFormat: '',
+    maxSpeakers: '2',
+    maxAudience: '50'
   });
 
-  const isFormValid = formData.title && formData.description && formData.category && formData.debateFormat;
+  const isFormValid = formData.title && formData.description && formData.category && formData.debateFormat && formData.maxSpeakers && formData.maxAudience;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,7 +57,9 @@ export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalPr
       title: '',
       description: '',
       category: '',
-      debateFormat: ''
+      debateFormat: '',
+      maxSpeakers: '2',
+      maxAudience: '50'
     });
   };
 
@@ -130,6 +134,39 @@ export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalPr
                 3분 토론
               </Badge>
             </div>
+          </div>
+          
+          <div className="space-y-2">
+            <Label htmlFor="maxSpeakers">최대 발화자 수</Label>
+            <Select value={formData.maxSpeakers} onValueChange={(value) => setFormData({ ...formData, maxSpeakers: value })}>
+              <SelectTrigger className={!formData.maxSpeakers ? 'border-destructive focus:ring-destructive' : ''}>
+                <SelectValue placeholder="최대 발화자 수를 선택하세요" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="2">2명</SelectItem>
+                <SelectItem value="4">4명</SelectItem>
+                <SelectItem value="6">6명</SelectItem>
+                <SelectItem value="8">8명</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          
+          <div className="space-y-2">
+            <Label htmlFor="maxAudience">최대 관중 수</Label>
+            <Input
+              id="maxAudience"
+              type="number"
+              value={formData.maxAudience}
+              onChange={(e) => {
+                const value = Math.min(100, Math.max(1, parseInt(e.target.value) || 1));
+                setFormData({ ...formData, maxAudience: value.toString() });
+              }}
+              placeholder="최대 관중 수 (최대 100명)"
+              className={!formData.maxAudience ? 'border-destructive focus-visible:ring-destructive' : ''}
+              min="1"
+              max="100"
+              required
+            />
           </div>
           
           <div className="flex gap-2 pt-4">
