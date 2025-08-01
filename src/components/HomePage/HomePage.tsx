@@ -281,7 +281,6 @@ export const HomePage = () => {
             
             <Button 
               onClick={handleCreateRoom}
-              disabled={isGuest}
               className={`gap-2 shadow-glow ${isGuest ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               <Plus className="h-4 w-4" />
