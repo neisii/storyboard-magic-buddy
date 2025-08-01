@@ -151,12 +151,8 @@ export const useDebateRoom = (roomId: string) => {
 
   // 토론방 나가기
   const leaveRoom = () => {
-    setState(prev => ({
-      ...prev,
-      isJoined: false,
-      showJoinModal: true,
-      userRole: null,
-    }));
+    // 홈페이지로 이동
+    window.location.href = '/';
   };
 
   // 손들기 (관중이 발언 요청)
