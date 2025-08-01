@@ -363,6 +363,7 @@ export const HomePage = () => {
           topic={selectedRoom.topic}
           participantCount={selectedRoom.participantCount}
           onJoinAsAudience={() => handleJoinRoom()}
+          onJoinAsSpeaker={() => handleJoinRoom()}
         />
       )}
 

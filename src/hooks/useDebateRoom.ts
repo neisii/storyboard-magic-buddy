@@ -123,13 +123,23 @@ export const useDebateRoom = (roomId: string) => {
     }));
   };
 
-  // 토론방 입장
+  // 토론방 입장 - 관중으로
   const joinAsAudience = () => {
     setState(prev => ({
       ...prev,
       showJoinModal: false,
       isJoined: true,
       userRole: 'audience',
+    }));
+  };
+
+  // 토론방 입장 - 발화자로
+  const joinAsSpeaker = () => {
+    setState(prev => ({
+      ...prev,
+      showJoinModal: false,
+      isJoined: true,
+      userRole: 'speaker',
     }));
   };
 
@@ -178,6 +188,7 @@ export const useDebateRoom = (roomId: string) => {
     ...state,
     actions: {
       joinAsAudience,
+      joinAsSpeaker,
       sendChatMessage,
       leaveRoom,
       raiseHand,

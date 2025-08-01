@@ -10,6 +10,7 @@ interface JoinModalProps {
   participantCount: number;
   isLoading?: boolean;
   onJoinAsAudience: () => void;
+  onJoinAsSpeaker: () => void;
 }
 
 export const JoinModal = ({ 
@@ -19,7 +20,8 @@ export const JoinModal = ({
   topic, 
   participantCount, 
   isLoading = false, 
-  onJoinAsAudience 
+  onJoinAsAudience,
+  onJoinAsSpeaker
 }: JoinModalProps) => {
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -59,10 +61,22 @@ export const JoinModal = ({
             </div>
 
             {/* 입장 버튼 */}
-            <div className="space-y-2">
+            <div className="space-y-3">
+              <Button 
+                onClick={onJoinAsSpeaker} 
+                className="w-full bg-primary hover:bg-primary/90"
+                size="lg"
+              >
+                발화자로 참여하기
+              </Button>
+              <p className="text-xs text-muted-foreground text-center">
+                발화자로 참여하여 열정을 불태워보세요!
+              </p>
+              
               <Button 
                 onClick={onJoinAsAudience} 
-                className="w-full bg-primary hover:bg-primary/90"
+                variant="outline"
+                className="w-full"
                 size="lg"
               >
                 관중으로 참여하기

@@ -36,6 +36,7 @@ export const DebateRoom = ({ roomId }: DebateRoomProps) => {
           participantCount={totalParticipants}
           isLoading={isLoading}
           onJoinAsAudience={actions.joinAsAudience}
+          onJoinAsSpeaker={actions.joinAsSpeaker}
         />
       </div>
     );
