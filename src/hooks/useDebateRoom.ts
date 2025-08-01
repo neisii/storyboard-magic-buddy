@@ -57,7 +57,7 @@ export const useDebateRoom = (roomId: string) => {
     currentSpeaker: null,
     isLoading: true,
     isJoined: false,
-    showJoinModal: false,
+    showJoinModal: true,
     userRole: null,
   });
 
