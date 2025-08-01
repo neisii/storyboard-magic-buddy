@@ -238,7 +238,8 @@ export const HomePage = () => {
 
   const handleClearFilters = () => {
     setFilters({
-      status: []
+      status: [],
+      maxParticipants: 999
     });
   };
 
