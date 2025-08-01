@@ -12,6 +12,7 @@ interface UserFloatingMenuProps {
 
 export const UserFloatingMenu = ({ onLogin, onProfileClick }: UserFloatingMenuProps) => {
   const { user, isAuthenticated, logout } = useAuth();
+  console.log("user >> " +user);
   console.log("isAuthenticated >> " +isAuthenticated);
   
   const getProviderDisplay = (provider: 'kakao' | 'google') => {
