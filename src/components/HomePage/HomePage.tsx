@@ -12,7 +12,7 @@ import { LoginModal } from './LoginModal';
 import { SignupModal } from './SignupModal';
 import { ProfileModal } from './ProfileModal';
 import { FilterSection, type FilterState } from './FilterSection';
-// import { useAuth } from '@/hooks/useAuth';
+// import { useAuth } from '@/hooks/useAuth'; // 기본 hook 대신 AuthContext 사용해야 함
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from 'sonner';
 
