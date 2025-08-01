@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Slider } from '@/components/ui/slider';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from '@/hooks/use-toast';
 
@@ -25,7 +26,8 @@ export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalPr
     category: '',
     debateFormat: '',
     maxSpeakers: '2',
-    maxAudience: '50'
+    maxAudience: '50',
+    duration: '60'
   });
 
   const isFormValid = formData.title && formData.description && formData.category && formData.debateFormat && formData.maxSpeakers && formData.maxAudience;
@@ -59,7 +61,8 @@ export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalPr
       category: '',
       debateFormat: '',
       maxSpeakers: '2',
-      maxAudience: '50'
+      maxAudience: '50',
+      duration: '60'
     });
   };
 
@@ -134,6 +137,41 @@ export const CreateRoomModal = ({ isOpen, onClose, onCreate }: CreateRoomModalPr
                 3분 토론
               </Badge>
             </div>
+          </div>
+          
+          <div className="space-y-3">
+            <Label htmlFor="duration">토론 시간</Label>
+            {formData.debateFormat === 'quick' ? (
+              <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
+                <span className="text-sm font-medium">3분</span>
+                <span className="text-xs text-muted-foreground">3분 토론 고정</span>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                <Slider
+                  value={[parseInt(formData.duration)]}
+                  onValueChange={(value) => setFormData({ ...formData, duration: value[0].toString() })}
+                  min={0}
+                  max={3}
+                  step={1}
+                  className="w-full"
+                />
+                <div className="flex justify-between text-xs text-muted-foreground">
+                  <span>30분</span>
+                  <span>60분</span>
+                  <span>90분</span>
+                  <span>120분</span>
+                </div>
+                <div className="text-center">
+                  <span className="text-sm font-medium">
+                    {formData.duration === '0' && '30분'}
+                    {formData.duration === '1' && '60분'}
+                    {formData.duration === '2' && '90분'}
+                    {formData.duration === '3' && '120분'}
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
           
           <div className="space-y-2">
