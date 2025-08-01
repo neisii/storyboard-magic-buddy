@@ -18,30 +18,30 @@ export const DebateRoom = ({ roomId }: DebateRoomProps) => {
     speechHistory,
     chatMessages,
     isLoading,
-    showJoinModal,
+    // showJoinModal,
     isJoined,
     actions
   } = useDebateRoom(roomId);
 
   const totalParticipants = speakers.length + audience.length;
 
-  if (!isJoined) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/5 flex items-center justify-center">
-        <JoinModal
-          open={showJoinModal}
-          onClose={() => {}}
-          title={title}
-          topic={topic}
-          participantCount={totalParticipants}
-          duration={duration}
-          isLoading={isLoading}
-          onJoinAsAudience={actions.joinAsAudience}
-          onJoinAsSpeaker={actions.joinAsSpeaker}
-        />
-      </div>
-    );
-  }
+  // if (!isJoined) {
+  //   return (
+  //     <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/5 flex items-center justify-center">
+  //       <JoinModal
+  //         open={showJoinModal}
+  //         onClose={() => {}}
+  //         title={title}
+  //         topic={topic}
+  //         participantCount={totalParticipants}
+  //         duration={duration}
+  //         isLoading={isLoading}
+  //         onJoinAsAudience={actions.joinAsAudience}
+  //         onJoinAsSpeaker={actions.joinAsSpeaker}
+  //       />
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/5">
