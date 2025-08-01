@@ -8,6 +8,7 @@ interface JoinModalProps {
   title: string;
   topic: string;
   participantCount: number;
+  duration: string;
   isLoading?: boolean;
   onJoinAsAudience: () => void;
   onJoinAsSpeaker: () => void;
@@ -19,6 +20,7 @@ export const JoinModal = ({
   title, 
   topic, 
   participantCount, 
+  duration,
   isLoading = false, 
   onJoinAsAudience,
   onJoinAsSpeaker
@@ -52,6 +54,10 @@ export const JoinModal = ({
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <Users className="h-4 w-4" />
                   <span>{participantCount}명 참여 중</span>
+                </div>
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Users className="h-4 w-4" />
+                  <span>{room.duration} 째 불타는 중</span>
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <Clock className="h-4 w-4" />
