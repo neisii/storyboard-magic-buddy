@@ -13,6 +13,7 @@ import Index from "./pages/Index";
 import DebateRoom from "./pages/DebateRoom";
 import NotFound from "./pages/NotFound";
 import LandingPage from "./pages/LandingPage";
+import LandingPageV2 from "./pages/LandingPageV2";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ const AppContent = () => {
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/landing" element={<LandingPage />} />
+          <Route path="/landing-v2" element={<LandingPageV2 />} />
           <Route path="/debate/:roomId" element={<DebateRoom />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
