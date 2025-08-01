@@ -198,16 +198,10 @@ export const HomePage = () => {
   };
 
   const handleCreateRoom = () => {
-    // 인증 검증
+    // 인증되지 않은 사용자나 게스트만 모달을 열 수 있음
     if (!isAuthenticated || isGuest) {
-      toast({
-        title: "로그인 필요",
-        description: "토론방을 만들려면 로그인이 필요합니다.",
-        variant: "destructive",
-      });
-      return;
+      setIsCreateModalOpen(true);
     }
-    setIsCreateModalOpen(true);
   };
 
   const handleCreateRoomSubmit = (roomData: any) => {
