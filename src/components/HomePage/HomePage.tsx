@@ -345,27 +345,6 @@ export const HomePage = () => {
         )}
       </div>
 
-      {/* Floating User Menu */}
-      <UserFloatingMenu 
-        onLogin={handleLogin} 
-        onProfileClick={() => setIsProfileModalOpen(true)}
-      />
-
-      {/* Join Modal */}
-      {selectedRoom && (
-        <JoinModal
-          open={isJoinModalOpen}
-          onClose={() => {
-            setIsJoinModalOpen(false);
-            setSelectedRoom(null);
-          }}
-          title={selectedRoom.title}
-          topic={selectedRoom.topic}
-          participantCount={selectedRoom.participantCount}
-          onJoinAsAudience={handleJoinRoom}
-        />
-      )}
-
       {/* Create Room Modal */}
       <CreateRoomModal
         isOpen={isCreateModalOpen}
@@ -373,26 +352,6 @@ export const HomePage = () => {
         onCreate={handleCreateRoomSubmit}
       />
 
-      {/* Login Modal */}
-      <LoginModal
-        isOpen={isLoginModalOpen}
-        onClose={() => setIsLoginModalOpen(false)}
-        onKakaoLogin={handleKakaoLogin}
-        onGoogleLogin={handleGoogleLogin}
-      />
-
-      {/* Signup Modal */}
-      <SignupModal
-        isOpen={isSignupModalOpen}
-        onClose={() => setIsSignupModalOpen(false)}
-        onKakaoSignup={handleKakaoSignup}
-        onGoogleSignup={handleGoogleSignup}
-      />
-
-      <ProfileModal
-        isOpen={isProfileModalOpen}
-        onClose={() => setIsProfileModalOpen(false)}
-      />
     </div>
   );
 };
