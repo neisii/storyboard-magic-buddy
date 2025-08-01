@@ -114,7 +114,8 @@ export const DebateRoomCard = ({ room, onClick, onAudienceJoin }: DebateRoomCard
               className="flex-1"
               onClick={(e) => {
                 e.stopPropagation();
-                onAudienceJoin();
+                onClick();
+                // onAudienceJoin();
               }}
             >
               관중으로 참여하기
