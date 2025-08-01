@@ -107,29 +107,17 @@ export const DebateRoomCard = ({ room, onClick, onAudienceJoin }: DebateRoomCard
         </div>
         
         {isClickable && (
-          <div className="flex gap-2 mt-4">
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="flex-1"
-              onClick={(e) => {
-                e.stopPropagation();
-                onClick();
-                // onAudienceJoin();
-              }}
-            >
-              관중으로 참여하기
-            </Button>
+          <div className="mt-4">
             <Button 
               variant="default" 
               size="sm" 
-              className="flex-1"
+              className="w-full"
               onClick={(e) => {
                 e.stopPropagation();
                 onClick();
               }}
             >
-              발화자로 참여하기
+              토론방 입장하기
             </Button>
           </div>
         )}
