@@ -70,18 +70,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const isAuthenticated = !!user;
   const isGuest = !user;
 
-  const value = {
-    user,
-    isAuthenticated,
-    isGuest,
-    isLoading,
-    login,
-    logout,
-    deleteAccount
-  };
-
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider value={{
+      user,
+      isAuthenticated,
+      isGuest,
+      isLoading,
+      login,
+      logout,
+      deleteAccount
+    }}>
       {children}
     </AuthContext.Provider>
   );

@@ -44,7 +44,7 @@ const statusConfig = {
     textClass: 'text-debate-paused-foreground',
     borderClass: 'border-debate-paused/20', 
     icon: Pause,
-    label: '일시정지'
+    label: '대기중'
   }
 };
 

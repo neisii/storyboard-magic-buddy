@@ -25,7 +25,7 @@ export const FilterSection = ({ isVisible, filters, onFiltersChange, onClearFilt
   const statusOptions = [
     { value: 'active', label: '진행중' },
     { value: 'ended', label: '종료됨' },
-    { value: 'paused', label: '일시정지' }
+    { value: 'paused', label: '대기중' }
   ];
 
   const handleStatusToggle = (status: string) => {
