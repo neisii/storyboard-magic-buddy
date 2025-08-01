@@ -30,6 +30,7 @@ export const UserFloatingMenu = ({ onLogin, onProfileClick }: UserFloatingMenuPr
   return (
     <div className="fixed bottom-6 left-6 z-50">
       {isAuthenticated ? (
+      // 로그인 상태
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
@@ -74,6 +75,7 @@ export const UserFloatingMenu = ({ onLogin, onProfileClick }: UserFloatingMenuPr
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
+      // 로그아웃 상태
         <Button
           onClick={handleLoginClick}
           variant="outline"
