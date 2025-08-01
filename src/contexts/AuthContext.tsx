@@ -84,3 +84,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     </AuthContext.Provider>
   );
 };
+
+export const useAuth = (): AuthContextValue => {
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error("useAuth는 반드시 <AuthProvider> 안에서 사용해야 함");
+  return ctx;
+};
