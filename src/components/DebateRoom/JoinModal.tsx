@@ -69,9 +69,9 @@ export const JoinModal = ({
               >
                 발화자로 참여하기
               </Button>
-              <p className="text-xs text-muted-foreground text-center">
+              {/* <p className="text-xs text-muted-foreground text-center">
                 발화자로 참여하여 열정을 불태워보세요!
-              </p>
+              </p> */}
               
               <Button 
                 onClick={onJoinAsAudience} 
@@ -81,9 +81,9 @@ export const JoinModal = ({
               >
                 관중으로 참여하기
               </Button>
-              <p className="text-xs text-muted-foreground text-center">
+              {/* <p className="text-xs text-muted-foreground text-center">
                 관중으로 참여하여 토론을 시청하고 채팅에 참여할 수 있습니다
-              </p>
+              </p> */}
             </div>
           </div>
         )}
